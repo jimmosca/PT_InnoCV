@@ -15,13 +15,13 @@ interface UsersAPI {
     suspend fun getUser(@Path("id") id: Int): Response<User>
 
     @POST("User")
-    suspend fun postUser(): Response<Any>
+    suspend fun postUser(): Response<Void>
 
     @PUT("User")
-    suspend fun putUser(): Response<Any>
+    suspend fun putUser(): Response<Void>
 
     @DELETE("User/{id}")
-    suspend fun deleteUser(@Path("id") id: Int): Response<Any>
+    suspend fun deleteUser(@Path("id") id: Int): Response<Void>
 }
 
 object RetrofitFactory {

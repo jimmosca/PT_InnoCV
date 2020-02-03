@@ -1,11 +1,13 @@
 package com.jca.myapplication.data.remote
 
+import android.util.Log
 import com.jca.myapplication.model.User
 
 class RetrofitRemoteRepository(private val usersAPI: UsersAPI): RemoteRepository{
     override suspend fun getUsers(): List<User>? {
         val getUsersResponse = usersAPI.getUsers()
         return if (getUsersResponse.isSuccessful){
+            Log.e("RemoteRepo", "La peticion fue bien")
             getUsersResponse.body()!!
         }else
             null
