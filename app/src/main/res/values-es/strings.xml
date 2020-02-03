@@ -5,4 +5,9 @@
     <string name="edit_button">Botón Editar</string>
     <string name="delete_button">Botón Borrar</string>
     <string name="search_hint">Busca por ID</string>
+    <string name="new_username">Nuevo Nombre Usuario</string>
+    <string name="name">Nombre</string>
+    <string name="accept">Aceptar</string>
+    <string name="empty_text">Debes escribir algo</string>
+    <string name="insertion_error">Ha ocurrido un error durante la inserción</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.jca.myapplication.ui.main_screen
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import com.jca.myapplication.R
 import com.jca.myapplication.data.remote.RetrofitFactory
 import com.jca.myapplication.data.remote.RetrofitRemoteRepository
 import com.jca.myapplication.model.User
+import com.jca.myapplication.ui.user_form.UserFormActivity
 
 class MainActivity : AppCompatActivity(),
     MainView {
@@ -22,12 +24,13 @@ class MainActivity : AppCompatActivity(),
     private lateinit var searchBar: SearchView
     private lateinit var btnAdd: FloatingActionButton
     private lateinit var txtNoResults: TextView
+    private lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val presenter =
+        presenter =
             MainPresenter(
                 this,
                 RetrofitRemoteRepository(RetrofitFactory.makeRetrofitService())
@@ -64,6 +67,11 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        presenter.init()
+    }
+
     override fun showUserList(users: List<User>) {
         txtNoResults.visibility = View.GONE
         recyclerView.visibility = View.VISIBLE
@@ -71,7 +79,13 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun showToast(msg: String) {
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun openFormView(id: Int) {
+        val intent = Intent(this, UserFormActivity::class.java)
+        intent.putExtra("id", id)
+        startActivity(intent)
     }
 
 }

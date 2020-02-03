@@ -15,19 +15,20 @@ class MainPresenter(private val view: MainView, private val remoteRepository: Re
 
     private fun getUsers() {
         CoroutineScope(Dispatchers.IO).launch {
-            val users = remoteRepository.getUsers()
+            val users: List<User>? = remoteRepository.getUsers()
             withContext(Dispatchers.Main) {
+                if (users != null) {
+                    if (users.isNotEmpty())
+                        view.showUserList(users)
 
-                if (users!!.isNotEmpty())
-
-                    view.showUserList(users)
-
+                } else
+                    view.showToast("An error occurred while getting users")
             }
         }
     }
 
     fun onEditClicked(id: Int) {
-
+        view.openFormView(id)
     }
 
     fun onDeleteClicked(id: Int) {
@@ -49,12 +50,13 @@ class MainPresenter(private val view: MainView, private val remoteRepository: Re
     }
 
     fun onAddClicked() {
-
+        view.openFormView()
     }
 }
 
 interface MainView {
     fun showUserList(users: List<User>)
     fun showToast(msg: String)
+    fun openFormView(id: Int = 0)
 
 }

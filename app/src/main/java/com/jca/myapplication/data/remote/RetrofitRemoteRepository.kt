@@ -20,12 +20,12 @@ class RetrofitRemoteRepository(private val usersAPI: UsersAPI): RemoteRepository
             null
     }
     override suspend fun postUser(user: User): Boolean {
-        val postUserResponse = usersAPI.postUser()
+        val postUserResponse = usersAPI.postUser(user)
         return postUserResponse.isSuccessful
 
     }
     override suspend fun putUser(user: User): Boolean {
-        val putUserResponse = usersAPI.putUser()
+        val putUserResponse = usersAPI.putUser(user)
         return putUserResponse.isSuccessful
     }
     override suspend fun deleteUser(id: Int): Boolean {

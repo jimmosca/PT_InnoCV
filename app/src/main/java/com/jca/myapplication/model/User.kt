@@ -2,6 +2,6 @@ package com.jca.myapplication.model
 
 data class User (
     val id: Int, // database entity
-    val name: String,
+    var name: String,
     val birthdate: String
 )

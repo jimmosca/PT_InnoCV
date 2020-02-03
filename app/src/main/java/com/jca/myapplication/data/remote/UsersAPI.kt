@@ -15,10 +15,10 @@ interface UsersAPI {
     suspend fun getUser(@Path("id") id: Int): Response<User>
 
     @POST("User")
-    suspend fun postUser(): Response<Void>
+    suspend fun postUser(@Body user: User): Response<Void>
 
     @PUT("User")
-    suspend fun putUser(): Response<Void>
+    suspend fun putUser(@Body user: User): Response<Void>
 
     @DELETE("User/{id}")
     suspend fun deleteUser(@Path("id") id: Int): Response<Void>
